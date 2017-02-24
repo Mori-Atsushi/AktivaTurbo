@@ -12,6 +12,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+    dependencies {
+        compile 'com.android.support:multidex:1.0.1'
+    }
     signingConfigs {
         release {
             storeFile file("../AktivaTurbo.keystore")
