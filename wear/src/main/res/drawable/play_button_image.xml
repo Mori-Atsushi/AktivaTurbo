@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Buttonが押されたとき-->
+    <item android:state_activated="true"
+        android:drawable="@drawable/button_play" />
+
+    <!-- Buttonが押されていないとき -->
+    <item android:state_accelerated="false"
+        android:drawable="@drawable/button_stop" />
+</selector>

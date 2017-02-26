@@ -5,11 +5,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.cyder.aktivaturbo.MainActivity"
-    tools:deviceIds="wear_square">
+    tools:deviceIds="wear_square"
+    android:weightSum="1">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_square" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:src="@drawable/play_button_image"
+            android:scaleType="centerInside"
+            android:background="@drawable/action_item_background"
+            android:id="@+id/play_button"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_height="50dp"
+            android:layout_width="50dp" />
+    </RelativeLayout>
 </LinearLayout>
