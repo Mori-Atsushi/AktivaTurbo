@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CircleGauge">
-        <attr name="text" format="string" />
-        <attr name="text_color" format="color" />
         <attr name="gauge_radius" format="integer|float" />
         <attr name="gauge_width" format="integer|float" />
-        <attr name="size" format="dimension" />
         <attr name="gauge_foreground_color" format="color" />
         <attr name="gauge_background_color" format="color" />
     </declare-styleable>
