@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="playing_gauge_back">#004c2e</color>
+    <color name="playing_gauge_fore">#00e0a8</color>
+    <color name="section_gauge_back">#220d46</color>
+    <color name="section_gauge_fore">#6222e0</color>
+    <color name="speed_gauge_back">#002d63</color>
+    <color name="speed_gauge_fore">#16caf6</color>
+</resources>
