@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -13,6 +14,10 @@ import android.view.View;
  */
 
 public class CircleGauge extends View {
+
+	/** 背景 */
+	int mainBackgroundColor;
+
 	/** 文章 */
 	private String text;
 	/** textの文字色(デフォルトは白) */
@@ -45,7 +50,9 @@ public class CircleGauge extends View {
 
 	public void onDraw(Canvas canvas){
 		Paint paint = new Paint();
-		canvas.drawColor(Color.RED);
-		canvas.drawCircle(10, 10, 5, paint);
+		paint.setColor(gaugeBackgroundColor);
+		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius, paint);
+		paint.setColor(mainBackgroundColor);
+		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius - gaugeWidth, paint);
 	}
 }
