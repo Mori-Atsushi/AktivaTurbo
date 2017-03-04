@@ -1,7 +1,10 @@
 package com.example.cyder.aktivaturbo;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -33,5 +36,16 @@ public class CircleGauge extends View {
 
 	public CircleGauge(Context context, AttributeSet attrs) {
 		super(context, attrs);
+
+//		attrsファイルがヌルでないか
+		if(attrs == null){
+			return;
+		}
+	}
+
+	public void onDraw(Canvas canvas){
+		Paint paint = new Paint();
+		canvas.drawColor(Color.RED);
+		canvas.drawCircle(10, 10, 5, paint);
 	}
 }
