@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -60,11 +61,18 @@ public class CircleGauge extends View {
 		array.recycle();
 	}
 
+	@Override
 	public void onDraw(Canvas canvas){
 		Paint paint = new Paint();
 		paint.setColor(gaugeBackgroundColor);
 		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius, paint);
 		paint.setColor(mainBackgroundColor);
 		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius - gaugeWidth, paint);
+		paint.setColor(gaugeForegroundColor);
+		RectF rect = new RectF(getWidth() / 2 - 150, getWidth() / 2 - 150, getWidth() / 2 + 150, getWidth() / 2 + 150);
+		canvas.drawArc(rect, -90, 120, true, paint);
+		paint.setColor(mainBackgroundColor);
+		RectF rect2 = new RectF(getWidth() / 2 - 150 + gaugeWidth, getWidth() / 2 - 150 + gaugeWidth, getWidth() / 2 + 150 - gaugeWidth, getWidth() / 2 + 150 - gaugeWidth);
+		canvas.drawArc(rect2, -90, 120, true, paint);
 	}
 }
