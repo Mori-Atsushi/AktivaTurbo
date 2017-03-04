@@ -24,7 +24,8 @@
             android:layout_alignParentTop="true"
             custom:gauge_radius="150"
             custom:gauge_width="30"
-            custom:gauge_background_color="@color/speed_gauge_back"/>
+            custom:gauge_background_color="@color/speed_gauge_back"
+            custom:gauge_foreground_color="@color/speed_gauge_fore"/>
 
         <!-- 再生ボタン -->
         <ImageButton
