@@ -26,13 +26,13 @@
             custom:gauge_background_color="@color/speed_gauge_back"/>
 
         <ImageButton
-            android:src="@drawable/play_button_image"
-            android:scaleType="centerInside"
-            android:background="@drawable/action_item_background"
             android:id="@+id/play_button"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_width="50dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/action_item_background"
+            android:scaleType="centerInside"
+            android:src="@drawable/play_button_image"/>
     </RelativeLayout>
 </LinearLayout>
