@@ -15,13 +15,13 @@ public class CircleGauge extends View {
 	/** textの文字色(デフォルトは白) */
 	private int textColor = Color.WHITE;
 	/** ゲージ自体の背景色 */
-	private int gaugeBackgroundColor;
+	private int gaugeBackgroundColor = Color.RED;
 	/** ゲージ自体の前景色 */
-	private int gaugeForegroundColor;
+	private int gaugeForegroundColor = Color.MAGENTA;
 	/** ゲージの半径(ゲージの一番外側の円を半径とします) */
-	private int gaugeRadius;
+	private int gaugeRadius = 100;
 	/** ゲージの太さ */
-	private int gaugeWidth;
+	private int gaugeWidth = 5;
 
 	public CircleGauge(Context context) {
 		super(context);
