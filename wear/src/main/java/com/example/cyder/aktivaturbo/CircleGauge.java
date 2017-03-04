@@ -1,6 +1,7 @@
 package com.example.cyder.aktivaturbo;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -42,10 +43,19 @@ public class CircleGauge extends View {
 	public CircleGauge(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
+		Resources res = getResources();
+		mainBackgroundColor = ContextCompat.getColor(context, R.color.main_background);
+
 //		attrsファイルがヌルでないか
 		if(attrs == null){
 			return;
 		}
+
+		TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CircleGauge);
+		gaugeRadius = array.getInteger(R.styleable.CircleGauge_gauge_radius, gaugeRadius);
+		gaugeWidth = array.getInteger(R.styleable.CircleGauge_gauge_width, gaugeWidth);
+		gaugeBackgroundColor = array.getColor(R.styleable.CircleGauge_gauge_background_color, gaugeBackgroundColor);
+		array.recycle();
 	}
 
 	public void onDraw(Canvas canvas){
