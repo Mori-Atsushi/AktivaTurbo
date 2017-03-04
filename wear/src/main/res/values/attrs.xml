@@ -3,9 +3,9 @@
     <!-- 円形ゲージの属性定義 -->
     <declare-styleable name="CircleGauge">
         <!-- ゲージの半径 -->
-        <attr name="gauge_radius" format="integer|float" />
+        <attr name="gauge_radius" format="dimension|integer|float" />
         <!-- ゲージの太さ -->
-        <attr name="gauge_width" format="integer|float" />
+        <attr name="gauge_width" format="dimension|integer|float" />
         <!-- ゲージの前景色 -->
         <attr name="gauge_foreground_color" format="color" />
         <!-- ゲージの背景色 -->
