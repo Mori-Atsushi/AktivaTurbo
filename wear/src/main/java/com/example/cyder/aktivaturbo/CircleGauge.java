@@ -51,10 +51,12 @@ public class CircleGauge extends View {
 			return;
 		}
 
+//		カスタム属性を読み込む
 		TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CircleGauge);
 		gaugeRadius = array.getInteger(R.styleable.CircleGauge_gauge_radius, gaugeRadius);
 		gaugeWidth = array.getInteger(R.styleable.CircleGauge_gauge_width, gaugeWidth);
 		gaugeBackgroundColor = array.getColor(R.styleable.CircleGauge_gauge_background_color, gaugeBackgroundColor);
+		gaugeForegroundColor = array.getColor(R.styleable.CircleGauge_gauge_foreground_color, gaugeForegroundColor);
 		array.recycle();
 	}
 
