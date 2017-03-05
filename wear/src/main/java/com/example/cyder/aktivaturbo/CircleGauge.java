@@ -104,5 +104,8 @@ public class CircleGauge extends View {
 		paint.setColor(mainBackgroundColor);
 		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius - gaugeWidth, paint);
 	}
+
+	public void setDegree(float degree){
+		this.degree = degree;
 	}
 }
