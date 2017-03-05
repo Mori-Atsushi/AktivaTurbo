@@ -2,4 +2,7 @@
     <string name="app_name">AktivaTurbo</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
+    <string name="speed_gauge_text">Speed</string>
+    <string name="section_gauge_text">Section</string>
+    <string name="playing_gauge_text">Playing</string>
 </resources>
