@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main_background">#111111</color>
+    <color name="gauge_text_color">#FFFFFF</color>
     <color name="playing_gauge_back">#004c2e</color>
     <color name="playing_gauge_fore">#00e0a8</color>
     <color name="section_gauge_back">#220d46</color>
