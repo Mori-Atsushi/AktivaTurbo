@@ -40,8 +40,8 @@ public class CircleGauge extends View {
 	/** ゲージの角度 */
 	private float degree = 60;
 
-	private float centerX;
-	private float centerY;
+	private float centerX;	//ゲージの中央のx座標
+	private float centerY;	//ゲージの中央のy座標
 
 	public CircleGauge(Context context) {
 		super(context);
@@ -87,24 +87,25 @@ public class CircleGauge extends View {
 	public void onDraw(Canvas canvas){
 		Paint paint = new Paint();
 
-//		ゲージの後ろ部分を描画
+//		(1)
 		paint.setColor(gaugeBackgroundColor);
-		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius, paint);
+		canvas.drawCircle(centerX, centerY, gaugeRadius, paint);
 
-
-//		ゲージの前部分を描画
+//		(2)
 		paint.setColor(gaugeForegroundColor);
-		RectF rect = new RectF(getWidth() / 2 - 150, getWidth() / 2 - 150, getWidth() / 2 + 150, getWidth() / 2 + 150);
+		RectF rect = new RectF(centerX - gaugeRadius, centerX - gaugeRadius, centerX + gaugeRadius, centerX + gaugeRadius);
 		canvas.drawArc(rect, defaultDegree, degree, true, paint);
-		canvas.drawCircle(getWidth() / 2, getHeight() / 2 - 150 + gaugeWidth / 2, gaugeWidth / 2, paint);
-		canvas.drawCircle(getWidth() / 2 + (float)sin(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2), getHeight() / 2 - (float)cos(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2), gaugeWidth / 2, paint);
+		canvas.drawCircle(centerX, centerY - gaugeRadius + gaugeWidth / 2, gaugeWidth / 2, paint);
+		canvas.drawCircle(centerX + (float)sin(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2), centerY - (float)cos(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2), gaugeWidth / 2, paint);
 
+//		(3)
 		paint.setColor(mainBackgroundColor);
-		RectF rect2 = new RectF(getWidth() / 2 - 150 + gaugeWidth, getWidth() / 2 - 150 + gaugeWidth, getWidth() / 2 + 150 - gaugeWidth, getWidth() / 2 + 150 - gaugeWidth);
+		RectF rect2 = new RectF(centerX - gaugeRadius + gaugeWidth, centerX - gaugeRadius + gaugeWidth, centerX + gaugeRadius - gaugeWidth, centerX + gaugeRadius - gaugeWidth);
 		canvas.drawArc(rect2, defaultDegree, degree, true, paint);
 
+//		(4)
 		paint.setColor(mainBackgroundColor);
-		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius - gaugeWidth, paint);
+		canvas.drawCircle(centerX, centerY, gaugeRadius - gaugeWidth, paint);
 	}
 
 	public void setDegree(float degree){
