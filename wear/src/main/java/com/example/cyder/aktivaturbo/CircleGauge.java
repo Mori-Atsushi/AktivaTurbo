@@ -38,7 +38,7 @@ public class CircleGauge extends View {
 	/** デフォルト(0%)の角度 */
 	private final float defaultDegree = -90;
 	/** ゲージの角度 */
-	private float degree = 120;
+	private float degree = 60;
 
 	private float centerX;
 	private float centerY;
@@ -96,6 +96,8 @@ public class CircleGauge extends View {
 		paint.setColor(gaugeForegroundColor);
 		RectF rect = new RectF(getWidth() / 2 - 150, getWidth() / 2 - 150, getWidth() / 2 + 150, getWidth() / 2 + 150);
 		canvas.drawArc(rect, defaultDegree, degree, true, paint);
+		canvas.drawCircle(getWidth() / 2, getHeight() / 2 - 150 + gaugeWidth / 2, gaugeWidth / 2, paint);
+		canvas.drawCircle(getWidth() / 2 + (float)sin(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2), getHeight() / 2 - (float)cos(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2), gaugeWidth / 2, paint);
 
 		paint.setColor(mainBackgroundColor);
 		RectF rect2 = new RectF(getWidth() / 2 - 150 + gaugeWidth, getWidth() / 2 - 150 + gaugeWidth, getWidth() / 2 + 150 - gaugeWidth, getWidth() / 2 + 150 - gaugeWidth);
