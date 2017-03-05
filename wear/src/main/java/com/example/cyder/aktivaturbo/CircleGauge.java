@@ -11,6 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
+import static java.lang.Math.*;
+
 /**
  * Created by kousuke nezu on 2017/03/02.
  */
@@ -32,6 +34,14 @@ public class CircleGauge extends View {
 	private int gaugeRadius = 100;
 	/** ゲージの太さ */
 	private int gaugeWidth = 5;
+
+	/** デフォルト(0%)の角度 */
+	private final float defaultDegree = -90;
+	/** ゲージの角度 */
+	private float degree = 120;
+
+	private float centerX;
+	private float centerY;
 
 	public CircleGauge(Context context) {
 		super(context);
@@ -59,20 +69,40 @@ public class CircleGauge extends View {
 		gaugeBackgroundColor = array.getColor(R.styleable.CircleGauge_gauge_background_color, gaugeBackgroundColor);
 		gaugeForegroundColor = array.getColor(R.styleable.CircleGauge_gauge_foreground_color, gaugeForegroundColor);
 		array.recycle();
+
+		centerX = getWidth() / 2;
+		centerY = getHeight() / 2;
 	}
 
+	/**
+	 * ゲージを描画します。
+	 * 順序は
+	 * 1.ゲージの外側の円を描画
+	 * 2.ゲージ部分の外側の扇形の描画
+	 * 3.ゲージ部分の内側の扇形の描画
+	 * 4.ゲージの内側の円を描画
+	 * @param canvas 描画するキャンバス
+	 */
 	@Override
 	public void onDraw(Canvas canvas){
 		Paint paint = new Paint();
+
+//		ゲージの後ろ部分を描画
 		paint.setColor(gaugeBackgroundColor);
 		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius, paint);
-		paint.setColor(mainBackgroundColor);
-		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius - gaugeWidth, paint);
+
+
+//		ゲージの前部分を描画
 		paint.setColor(gaugeForegroundColor);
 		RectF rect = new RectF(getWidth() / 2 - 150, getWidth() / 2 - 150, getWidth() / 2 + 150, getWidth() / 2 + 150);
-		canvas.drawArc(rect, -90, 120, true, paint);
+		canvas.drawArc(rect, defaultDegree, degree, true, paint);
+
 		paint.setColor(mainBackgroundColor);
 		RectF rect2 = new RectF(getWidth() / 2 - 150 + gaugeWidth, getWidth() / 2 - 150 + gaugeWidth, getWidth() / 2 + 150 - gaugeWidth, getWidth() / 2 + 150 - gaugeWidth);
-		canvas.drawArc(rect2, -90, 120, true, paint);
+		canvas.drawArc(rect2, defaultDegree, degree, true, paint);
+
+		paint.setColor(mainBackgroundColor);
+		canvas.drawCircle(getWidth() / 2, getHeight() / 2, gaugeRadius - gaugeWidth, paint);
+	}
 	}
 }
