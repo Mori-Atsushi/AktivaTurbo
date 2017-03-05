@@ -20,10 +20,10 @@ import static java.lang.Math.*;
 public class CircleGauge extends View {
 
 	/** 背景 */
-	int mainBackgroundColor;
+	private int mainBackgroundColor;
 
 	/** 文章 */
-	private String text;
+	private String text = "sample";
 	/** textの文字色(デフォルトは白) */
 	private int textColor = Color.WHITE;
 	/** ゲージ自体の背景色 */
@@ -40,8 +40,8 @@ public class CircleGauge extends View {
 	/** ゲージの角度 */
 	private float degree = 60;
 
-	private float centerX;	//ゲージの中央のx座標
-	private float centerY;	//ゲージの中央のy座標
+	private float centerX = getWidth() / 2;	//ゲージの中央のx座標
+	private float centerY = getHeight() / 2;	//ゲージの中央のy座標
 
 	public CircleGauge(Context context) {
 		super(context);
@@ -56,6 +56,9 @@ public class CircleGauge extends View {
 
 		Resources res = getResources();
 		mainBackgroundColor = ContextCompat.getColor(context, R.color.main_background);
+		textColor = ContextCompat.getColor(context, R.color.gauge_text_color);
+		centerX = getWidth() / 2;
+		centerY = getHeight() / 2;
 
 //		attrsファイルがヌルでないかチェック
 		if(attrs == null){
@@ -64,14 +67,12 @@ public class CircleGauge extends View {
 
 //		カスタム属性を読み込む
 		TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CircleGauge);
+		text = array.getString(R.styleable.CircleGauge_gauge_text);
 		gaugeRadius = array.getInteger(R.styleable.CircleGauge_gauge_radius, gaugeRadius);
 		gaugeWidth = array.getInteger(R.styleable.CircleGauge_gauge_width, gaugeWidth);
 		gaugeBackgroundColor = array.getColor(R.styleable.CircleGauge_gauge_background_color, gaugeBackgroundColor);
 		gaugeForegroundColor = array.getColor(R.styleable.CircleGauge_gauge_foreground_color, gaugeForegroundColor);
 		array.recycle();
-
-		centerX = getWidth() / 2;
-		centerY = getHeight() / 2;
 	}
 
 	/**
@@ -81,10 +82,13 @@ public class CircleGauge extends View {
 	 * 2.ゲージ部分の外側の扇形の描画
 	 * 3.ゲージ部分の内側の扇形の描画
 	 * 4.ゲージの内側の円を描画
+	 * 5.文字を描画
 	 * @param canvas 描画するキャンバス
 	 */
 	@Override
 	public void onDraw(Canvas canvas){
+		centerX = getWidth() / 2;
+		centerY = getHeight() / 2;
 		Paint paint = new Paint();
 
 //		(1)
@@ -106,6 +110,11 @@ public class CircleGauge extends View {
 //		(4)
 		paint.setColor(mainBackgroundColor);
 		canvas.drawCircle(centerX, centerY, gaugeRadius - gaugeWidth, paint);
+
+//		(5)
+		paint.setColor(textColor);
+		paint.setTextSize(20);
+		canvas.drawText(text, centerX, centerY - gaugeRadius + gaugeWidth, paint);
 	}
 
 	public void setDegree(float degree){
