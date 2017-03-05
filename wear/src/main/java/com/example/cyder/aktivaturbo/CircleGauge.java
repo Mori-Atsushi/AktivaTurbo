@@ -57,7 +57,7 @@ public class CircleGauge extends View {
 		Resources res = getResources();
 		mainBackgroundColor = ContextCompat.getColor(context, R.color.main_background);
 
-//		attrsファイルがヌルでないか
+//		attrsファイルがヌルでないかチェック
 		if(attrs == null){
 			return;
 		}
