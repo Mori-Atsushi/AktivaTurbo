@@ -2,6 +2,8 @@
 <resources>
     <!-- 円形ゲージの属性定義 -->
     <declare-styleable name="CircleGauge">
+        <!-- テキスト -->
+        <attr name="gauge_text" format="string" />
         <!-- ゲージの半径 -->
         <attr name="gauge_radius" format="dimension|integer|float" />
         <!-- ゲージの太さ -->
