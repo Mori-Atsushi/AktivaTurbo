@@ -38,7 +38,7 @@ public class CircleGauge extends View {
 	/** デフォルト(0%)の角度 */
 	private final float defaultDegree = -90;
 	/** ゲージの角度 */
-	private float degree = 60;
+	private float degree = 0;
 
 	private float centerX = getWidth() / 2;	//ゲージの中央のx座標
 	private float centerY = getHeight() / 2;	//ゲージの中央のy座標
