@@ -90,6 +90,7 @@ public class CircleGauge extends View {
 		centerX = getWidth() / 2;
 		centerY = getHeight() / 2;
 		Paint paint = new Paint();
+		paint.setAntiAlias(true);
 
 //		(1)
 		paint.setColor(gaugeBackgroundColor);
@@ -113,8 +114,9 @@ public class CircleGauge extends View {
 
 //		(5)
 		paint.setColor(textColor);
-		paint.setTextSize(20);
-		canvas.drawText(text, centerX, centerY - gaugeRadius + gaugeWidth, paint);
+		paint.setTextSize(25);
+		paint.setTextAlign(Paint.Align.RIGHT);
+		canvas.drawText(text, (float) (centerX * 0.85), centerY - gaugeRadius + gaugeWidth / 2 - (paint.getFontMetrics().ascent + paint.getFontMetrics().descent) / 2, paint);
 	}
 
 	public void setDegree(float degree){
