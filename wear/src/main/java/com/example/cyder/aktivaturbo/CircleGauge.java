@@ -24,8 +24,12 @@ public class CircleGauge extends View {
 
 	/** 文章 */
 	private String text = "sample";
+	/** textのサイズ(デフォルトは25) */
+	private int textSize = 25;
 	/** textの文字色(デフォルトは白) */
 	private int textColor = Color.WHITE;
+	/** textのx座標の中心点に対する倍率(デフォルトは0.85) */
+	private float textXposRate = 0.85f;
 	/** ゲージ自体の背景色 */
 	private int gaugeBackgroundColor = Color.RED;
 	/** ゲージ自体の前景色 */
@@ -105,7 +109,11 @@ public class CircleGauge extends View {
 
 //		(3)
 		paint.setColor(mainBackgroundColor);
-		RectF rect2 = new RectF(centerX - gaugeRadius + gaugeWidth, centerX - gaugeRadius + gaugeWidth, centerX + gaugeRadius - gaugeWidth, centerX + gaugeRadius - gaugeWidth);
+		RectF rect2 = new RectF(
+				centerX - gaugeRadius + gaugeWidth,
+				centerX - gaugeRadius + gaugeWidth,
+				centerX + gaugeRadius - gaugeWidth,
+				centerX + gaugeRadius - gaugeWidth);
 		canvas.drawArc(rect2, defaultDegree, degree, true, paint);
 
 //		(4)
@@ -114,12 +122,17 @@ public class CircleGauge extends View {
 
 //		(5)
 		paint.setColor(textColor);
-		paint.setTextSize(25);
+		paint.setTextSize(textSize);
 		paint.setTextAlign(Paint.Align.RIGHT);
-		canvas.drawText(text, (float) (centerX * 0.85), centerY - gaugeRadius + gaugeWidth / 2 - (paint.getFontMetrics().ascent + paint.getFontMetrics().descent) / 2, paint);
+		canvas.drawText(
+				text,
+				(float) (centerX * textXposRate),
+				centerY - gaugeRadius + gaugeWidth / 2 - (paint.getFontMetrics().ascent + paint.getFontMetrics().descent) / 2,
+				paint);
 	}
 
+//	角度の値が360度を超えないよう設定
 	public void setDegree(float degree){
-		this.degree = degree;
+		this.degree = degree % 360;
 	}
 }
