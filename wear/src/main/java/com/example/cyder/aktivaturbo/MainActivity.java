@@ -2,7 +2,6 @@ package com.example.cyder.aktivaturbo;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -14,7 +13,11 @@ public class MainActivity extends Activity {
     /** 再生ボタン */
     private ImageButton playButton;
 	/** 速度ゲージ */
-	private CircleGauge circleGauge;
+	private CircleGauge speedGauge;
+	/** セクションゲージ */
+	private CircleGauge sectionGauge;
+	/** プレイングゲージ */
+	private CircleGauge playingGauge;
     /** 再生ボタンの状態をあらわす。ture=再生、false=停止 */
     private boolean isPlaying = false;
 
@@ -36,7 +39,9 @@ public class MainActivity extends Activity {
 				v.setActivated(isPlaying);
 			}
 		});
-		circleGauge = (CircleGauge)findViewById(R.id.speed_circlegauge);
+		speedGauge = (CircleGauge)findViewById(R.id.speed_circlegauge);
+		sectionGauge = (CircleGauge)findViewById(R.id.section_circlegauge);
+		playingGauge = (CircleGauge)findViewById(R.id.playing_circlegauge);
     }
 
     @Override
