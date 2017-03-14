@@ -134,5 +134,6 @@ public class CircleGauge extends View {
 //	角度の値が360度を超えないよう設定
 	public void setDegree(float degree){
 		this.degree = degree % 360;
+		invalidate();
 	}
 }
