@@ -2,11 +2,12 @@ package com.example.cyder.aktivaturbo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     /** レイアウト */
     private RelativeLayout relativeLayout;
@@ -21,31 +22,52 @@ public class MainActivity extends Activity {
     /** 再生ボタンの状態をあらわす。ture=再生、false=停止 */
     private boolean isPlaying = false;
 
+    /** mobileとの通信のためのクラス */
+    MobileCommunicate mobileCommunicate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        四角形のレイアウトを読み込み。将来的には変更必要
         setContentView(R.layout.rect_activity_main);
-//        RelativeLayoutの初期化
-        relativeLayout = (RelativeLayout)findViewById(R.id.rect_relativelayout);
-//        ViewのIDを検索
-        playButton = (ImageButton)findViewById(R.id.play_button);
-//        押されている状態か否かを設定
-        playButton.setActivated(isPlaying);
-//      押されたときの挙動
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isPlaying = !isPlaying;
-                v.setActivated(isPlaying);
-            }
-        });
-        speedGauge = (CircleGauge)findViewById(R.id.speed_circlegauge);
-        sectionGauge = (CircleGauge)findViewById(R.id.section_circlegauge);
-        playingGauge = (CircleGauge)findViewById(R.id.playing_circlegauge);
+        //Viewを初期化
+        findViews();
+        Log.d("MainActivity", "onCreate通過");
+//        通信用クラスのインスタンス化
+        mobileCommunicate = new MobileCommunicate();
+        mobileCommunicate.connect(this);
     }
 
+    /**
+     * Viewを初期化するためのメソッド
+     */
+    private void findViews(){
+        //        ViewのIDを検索
+        playButton = (ImageButton)findViewById(R.id.play_button);
+        //        押されている状態か否かを設定
+        playButton.setActivated(isPlaying);
+        //        押されたときの挙動
+        playButton.setOnClickListener(this);
+    }
+
+    int i = 0;
+    /**
+     * Viewをクリックしたときに発生するリスナーを受け取るメソッド
+     * @param v クリックされたView
+     */
     @Override
-    protected void onResume(){
-        super.onResume();
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.play_button:
+                isPlaying = !isPlaying;
+                v.setActivated(isPlaying);
+                //使用例
+                mobileCommunicate.syncData(
+                        MobileCommunicate.AKTIVA_SEND_PATH, //パスを指定(おそらくこのままで問題ないはず)
+                        MobileCommunicate.KEY[0],             //キー　変更したいもののキーを入力
+                        String.valueOf(i++));                 //バリュー　変更する値を入力
+                Log.d("MainActivity", String.valueOf(i));
+                break;
+        }
     }
 }

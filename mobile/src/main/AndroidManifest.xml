@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- データのやりとりのサービスについて記述している部分 -->
+        <service
+            android:name=".MobileCommunicate"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED"/>
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/path"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
