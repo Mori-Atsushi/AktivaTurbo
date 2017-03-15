@@ -50,7 +50,6 @@ public class CircleGauge extends View {
 	public CircleGauge(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		Resources res = getResources();
 		mainBackgroundColor = ContextCompat.getColor(context, R.color.main_background);
 		textColor = ContextCompat.getColor(context, R.color.gauge_text_color);
 		centerX = getWidth() / 2;
@@ -76,9 +75,8 @@ public class CircleGauge extends View {
 	 * 順序は
 	 * 1.ゲージの外側の円を描画
 	 * 2.ゲージ部分の外側の扇形の描画
-	 * 3.ゲージ部分の内側の扇形の描画
-	 * 4.ゲージの内側の円を描画
-	 * 5.文字を描画
+	 * 3.ゲージの内側の円を描画
+	 * 4.文字を描画
 	 * @param canvas 描画するキャンバス
 	 */
 	@Override
@@ -97,22 +95,15 @@ public class CircleGauge extends View {
 		RectF rect = new RectF(centerX - gaugeRadius, centerX - gaugeRadius, centerX + gaugeRadius, centerX + gaugeRadius);
 		canvas.drawArc(rect, defaultDegree, degree, true, paint);
 		canvas.drawCircle(centerX, centerY - gaugeRadius + gaugeWidth / 2, gaugeWidth / 2, paint);
-		canvas.drawCircle(centerX + (float)sin(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2), centerY - (float)cos(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2), gaugeWidth / 2, paint);
+		canvas.drawCircle(centerX + (float)sin(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2),
+				centerY - (float)cos(toRadians(degree)) * (gaugeRadius - gaugeWidth / 2),
+				gaugeWidth / 2, paint);
 
 //		(3)
 		paint.setColor(mainBackgroundColor);
-		RectF rect2 = new RectF(
-				centerX - gaugeRadius + gaugeWidth,
-				centerX - gaugeRadius + gaugeWidth,
-				centerX + gaugeRadius - gaugeWidth,
-				centerX + gaugeRadius - gaugeWidth);
-		canvas.drawArc(rect2, defaultDegree, degree, true, paint);
-
-//		(4)
-		paint.setColor(mainBackgroundColor);
 		canvas.drawCircle(centerX, centerY, gaugeRadius - gaugeWidth, paint);
 
-//		(5)
+//		(4)
 		paint.setColor(textColor);
 		paint.setTextSize(textSize);
 		paint.setTextAlign(Paint.Align.RIGHT);
