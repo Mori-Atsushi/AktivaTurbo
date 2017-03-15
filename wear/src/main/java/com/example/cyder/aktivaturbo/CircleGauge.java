@@ -47,14 +47,6 @@ public class CircleGauge extends View {
 	private float centerX = getWidth() / 2;	//ゲージの中央のx座標
 	private float centerY = getHeight() / 2;	//ゲージの中央のy座標
 
-	public CircleGauge(Context context) {
-		super(context);
-	}
-
-	public CircleGauge(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-	}
-
 	public CircleGauge(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
