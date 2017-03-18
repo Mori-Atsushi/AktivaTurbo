@@ -19,6 +19,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private CircleGauge sectionGauge;
     /** プレイングゲージ */
     private CircleGauge playingGauge;
+    /** 頭出しボタン */
+    private ImageButton cueButton;
+    /** 早戻しボタン */
+    private ImageButton reverseButton;
     /** 再生ボタンの状態をあらわす。ture=再生、false=停止 */
     private boolean isPlaying = false;
 
@@ -46,8 +50,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
         playButton = (ImageButton)findViewById(R.id.play_button);
         //        押されている状態か否かを設定
         playButton.setActivated(isPlaying);
-        //        押されたときの挙動
-        playButton.setOnClickListener(this);
+//      押されたときの挙動
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isPlaying = !isPlaying;
+                v.setActivated(isPlaying);
+            }
+        });
+        speedGauge = (CircleGauge)findViewById(R.id.speed_circlegauge);
+        sectionGauge = (CircleGauge)findViewById(R.id.section_circlegauge);
+        playingGauge = (CircleGauge)findViewById(R.id.playing_circlegauge);
+        cueButton = (ImageButton)findViewById(R.id.cue_button);
+        reverseButton = (ImageButton)findViewById(R.id.reverse_button);
     }
 
     int i = 0;
