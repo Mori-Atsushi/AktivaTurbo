@@ -88,7 +88,7 @@ public class MainActivity extends Activity implements View.OnClickListener, View
             if(!isPlaying)
                 nowPlayDegree += 0.2;
         }
-        if(nowPlayDegree > maxDgree)
+        if(nowPlayDegree > maxDgree || nowPlayDegree < 0)
             nowPlayDegree = 0;
 
         playingGauge.setDegree(nowPlayDegree);
