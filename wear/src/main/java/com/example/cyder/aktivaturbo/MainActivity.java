@@ -79,8 +79,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     float nowPlayDegree = 0;
     public void InvalidateScreen(){
-        playingGauge.setDegree(nowPlayDegree);
-        nowPlayDegree += 0.5;
+        if(!isPlaying) {
+            playingGauge.setDegree(nowPlayDegree);
+            nowPlayDegree += 0.2;
+        }
         if(nowPlayDegree > maxDgree)
             nowPlayDegree = 0;
     }
