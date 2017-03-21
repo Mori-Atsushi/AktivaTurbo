@@ -54,7 +54,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         playButton.setOnClickListener(this);
 
         speedGauge = (CircleGauge)findViewById(R.id.speed_circlegauge);
+        speedGauge.setDegree((int)(360 * 0.6));
         sectionGauge = (CircleGauge)findViewById(R.id.section_circlegauge);
+        sectionGauge.setDegree(160);
         playingGauge = (CircleGauge)findViewById(R.id.playing_circlegauge);
 
         cueButton = (ImageButton)findViewById(R.id.cue_button);
