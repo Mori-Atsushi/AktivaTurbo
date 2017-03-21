@@ -3,13 +3,14 @@ package com.example.cyder.aktivaturbo;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener, View.OnTouchListener {
 
     /** レイアウト */
     private RelativeLayout relativeLayout;
@@ -27,6 +28,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private ImageButton reverseButton;
     /** 再生ボタンの状態をあらわす。ture=再生、false=停止 */
     private boolean isPlaying = false;
+    /** 巻き戻しボタンの状態をあらわす。ture=巻き戻し中、false=通常 */
+    private boolean isReverse = false;
 
     /** mobileとの通信のためのクラス */
     MobileCommunicate mobileCommunicate;
@@ -74,17 +77,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
         cueButton = (ImageButton)findViewById(R.id.cue_button);
         cueButton.setOnClickListener(this);
         reverseButton = (ImageButton)findViewById(R.id.reverse_button);
-        reverseButton.setOnClickListener(this);
+        reverseButton.setOnTouchListener(this);
     }
 
     float nowPlayDegree = 0;
     public void InvalidateScreen(){
-        if(!isPlaying) {
-            playingGauge.setDegree(nowPlayDegree);
-            nowPlayDegree += 0.2;
+        if(isReverse) {
+            nowPlayDegree -= 0.4;
+        } else {
+            if(!isPlaying)
+                nowPlayDegree += 0.2;
         }
         if(nowPlayDegree > maxDgree)
             nowPlayDegree = 0;
+
+        playingGauge.setDegree(nowPlayDegree);
     }
 
     int i = 0;
@@ -106,9 +113,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Log.d("MainActivity", String.valueOf(i));
                 break;
             case R.id.cue_button:
-                break;
-            case R.id.reverse_button:
+                nowPlayDegree = 0;
                 break;
         }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (v.getId()) {
+            case R.id.reverse_button:
+                int action = event.getAction();
+                switch(action) {
+                    case MotionEvent.ACTION_DOWN:
+                        isReverse = true;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        isReverse = false;
+                        break;
+                }
+                break;
+        }
+        return false;
     }
 }
