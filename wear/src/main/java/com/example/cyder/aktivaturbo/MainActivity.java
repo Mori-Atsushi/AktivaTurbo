@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -29,6 +31,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     /** mobileとの通信のためのクラス */
     MobileCommunicate mobileCommunicate;
 
+    /** 一定時間ごとに処理を行うタイマー */
+    private Timer timer;
+
+    /** 定数 */
+    private final float maxDgree = 240;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        通信用クラスのインスタンス化
         mobileCommunicate = new MobileCommunicate();
         mobileCommunicate.connect(this);
+
+        timer = new Timer();
+        TimerTask timerTask = new MyTimerTask(this);
+        timer.scheduleAtFixedRate(timerTask, 0, 30);
     }
 
     /**
@@ -54,15 +66,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
         playButton.setOnClickListener(this);
 
         speedGauge = (CircleGauge)findViewById(R.id.speed_circlegauge);
-        speedGauge.setDegree((int)(360 * 0.6));
+        speedGauge.setDegree((float)(360 * 0.8));
         sectionGauge = (CircleGauge)findViewById(R.id.section_circlegauge);
-        sectionGauge.setDegree(160);
+        sectionGauge.setDegree(maxDgree);
         playingGauge = (CircleGauge)findViewById(R.id.playing_circlegauge);
 
         cueButton = (ImageButton)findViewById(R.id.cue_button);
         cueButton.setOnClickListener(this);
         reverseButton = (ImageButton)findViewById(R.id.reverse_button);
         reverseButton.setOnClickListener(this);
+    }
+
+    float nowPlayDegree = 0;
+    public void InvalidateScreen(){
+        playingGauge.setDegree(nowPlayDegree);
+        nowPlayDegree += 0.5;
+        if(nowPlayDegree > maxDgree)
+            nowPlayDegree = 0;
     }
 
     int i = 0;
